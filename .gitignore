@@ -1,0 +1,128 @@
+<html>
+<head>
+<title>Gradient Maker!</title>
+<script>
+var X, C, V;
+var R, G, B;
+var Q, W, E;
+var assignments = JSON.parse(localStorage.getItem("Grad")) || [];
+function Load() {
+var para = document.createElement("p");
+for (var i = 0; i < assignments.length; i++) {
+para.innerHTML += assignments[i] + "<br/>";
+}
+document.getElementById("div1").appendChild(para);
+}
+
+
+
+
+
+
+
+
+function Gradient() {
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+ctx.moveTo(0,0);
+ctx.lineTo(1,800);
+ctx.lineTo(1000,800);
+ctx.lineTo(1000,1);
+R = Math.floor(Math.random()*255);         //These set RGB values so that the shapes made can have different colour gradients 
+G = Math.floor(Math.random()*255);
+B = Math.floor(Math.random()*255);
+X = Math.floor(Math.random()*255);
+C = Math.floor(Math.random()*255);
+V = Math.floor(Math.random()*255);
+Q = Math.floor(Math.random()*255);
+W = Math.floor(Math.random()*255);
+E = Math.floor(Math.random()*255);        //end
+var gradient=ctx.createLinearGradient(0,0,c.width,0);          //add gradient 
+gradient.addColorStop("0","rgb("+X+","+C+","+V+")");
+gradient.addColorStop("0.5","rgb("+R+","+G+","+B+")");
+gradient.addColorStop("1.0","rgb("+Q+","+W+","+E+")");
+// Fill with gradient
+ctx.fillStyle=gradient;                         //  syntax  "rgb("+R+","+G+","+B+")";
+ctx.lineJoin="beval";
+ctx.strokeStyle = "rgb("+R+","+G+","+B+")"
+ctx.stroke();
+ctx.fill();
+ctx.beginPath();
+
+document.getElementById("RGB").innerHTML = "(in RGB form) Color 1 ("+X+","+C+","+V+")"+" Color 2 ("+R+","+G+","+B+") Color 3 ("+Q+","+W+","+E+")";
+}
+
+function save() {
+if (X == undefined) {
+	alert("There is no Gradient loaded.");
+}
+else {
+var para=document.createElement("p");
+var text = "(in RGB form) Color 1 ("+X+","+C+","+V+")"+" Color 2 ("+R+","+G+","+B+") Color 3 ("+Q+","+W+","+E+")";                      //change this
+var node=document.createTextNode(text);
+para.appendChild(node);
+var element=document.getElementById("div1");
+element.appendChild(para);
+assignments.push(text);
+localStorage.setItem("Grad",JSON.stringify(assignments));
+}
+}
+
+
+
+function override() {
+var c=document.getElementById("myCanvas");
+var ctx=c.getContext("2d");
+ctx.moveTo(0,0);
+ctx.lineTo(1,800);
+ctx.lineTo(1000,800);
+ctx.lineTo(1000,1);
+var one = prompt("What is the first number?");
+var two = prompt("What is the second number?");
+var three = prompt("What is the thrird number?");
+var four = prompt("What is the fourth number?");
+var five = prompt("What is the fifth number?");
+var six = prompt("What is the sixth number?");
+var seven = prompt("What is the seventh number?");
+var eight = prompt("What is the eigth number?");
+var nine = prompt("What is the nineth number?");
+/*R = Math.floor(Math.random()*255);         //These set RGB values so that the shapes made can have different colour gradients 
+G = Math.floor(Math.random()*255);
+B = Math.floor(Math.random()*255);
+X = Math.floor(Math.random()*255);
+C = Math.floor(Math.random()*255);
+V = Math.floor(Math.random()*255);
+Q = Math.floor(Math.random()*255);
+W = Math.floor(Math.random()*255);
+E = Math.floor(Math.random()*255); 
+*/       //end
+var gradient=ctx.createLinearGradient(0,0,c.width,0);          //add gradient 
+gradient.addColorStop("0","rgb("+four+","+five+","+six+")");
+gradient.addColorStop("0.5","rgb("+one+","+two+","+three+")");
+gradient.addColorStop("1.0","rgb("+seven+","+eight+","+nine+")");
+// Fill with gradient
+ctx.fillStyle=gradient;                         //  syntax  "rgb("+R+","+G+","+B+")";
+ctx.lineJoin="beval";
+ctx.strokeStyle = "rgb("+R+","+G+","+B+")"
+ctx.stroke();
+ctx.fill();
+ctx.beginPath();
+
+document.getElementById("RGB").innerHTML = "(in RGB form) Color 1 ("+one+","+two+","+three+")"+" Color 2 ("+four+","+five+","+six+") Color 3 ("+seven+","+eight+","+nine+")";
+}
+
+</script>
+<body onload="Load()">
+<canvas id="myCanvas" width="1000" height="800" style="border:1px solid #c3c3c3;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+<h1 id="RGB"></h1>
+<button onclick="Gradient()">Generate a Gradient!</button><button onclick="save()">Save the current Gradient!</button><button onclick="override()">Load a Gradient!</button>
+<div id="div1">
+
+</div>
+</body>
+</html>
+<!-- Color 1 (208,139,34) Color 2 (199,244,17) Color 3 (3,76,71)-->
+<!--(in RGB form) Color 1 (10,0,42) Color 2 (220,97,225) Color 3 (240,7,86)-->
+<!--Replace the pink letter Grad to change the local storage-->
